@@ -22,20 +22,20 @@ form.addEventListener('input', event => {
   } else if (name === 'message') {
     formData.message = value.trim();
   }
+  localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 });
 form.addEventListener('submit', event => {
   event.preventDefault();
-  if (emailForm.value === '' || messageForm.value === '') {
+  if (formData.email === '' || formData.message === '') {
     alert('Fill please all fields');
   } else {
     console.log(formData);
     localStorage.removeItem('feedback-form-state');
-    localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+
+    formData.email = '';
+    formData.message = '';
+
+    emailForm.value = '';
+    messageForm.value = '';
   }
-
-  formData.email = '';
-  formData.message = '';
-
-  emailForm.value = '';
-  messageForm.value = '';
 });
